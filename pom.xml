@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>eureka-server</module>
+<!--        <module>eureka-server</module>-->
         <module>auth-server</module>
     </modules>
 
@@ -35,11 +35,11 @@
     </properties>
 
     <dependencies>
-        <!--注册中心-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;注册中心&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--        </dependency>-->
         <!--配置文件处理器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

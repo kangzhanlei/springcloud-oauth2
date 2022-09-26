@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -82,8 +83,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         Set<Integer> roleIds = sysUserRoleRelationService.list(sysUserRoleRelationQuery).stream().map(SysUserRoleRelation::getSysRoleId).collect(Collectors.toSet());
         QueryWrapper<SysRoleAuthorityRelation> sysRoleAuthorityRelationQuery = new QueryWrapper<>();
         sysRoleAuthorityRelationQuery.lambda().in(SysRoleAuthorityRelation::getSysRoleId, roleIds);
-        Set<Integer> authorityIds = sysRoleAuthorityRelationService.list(sysRoleAuthorityRelationQuery).stream().map(SysRoleAuthorityRelation::getSysAuthorityId)
-                .collect(Collectors.toSet());
+        Set<Integer> authorityIds = sysRoleAuthorityRelationService.list(sysRoleAuthorityRelationQuery).stream().map(SysRoleAuthorityRelation::getSysAuthorityId).collect(Collectors.toSet());
         QueryWrapper<SysAuthority> sysAuthorityQuery = new QueryWrapper<>();
         sysAuthorityQuery.lambda().in(SysAuthority::getId, authorityIds);
         List<SysAuthority> sysAuthorityList = sysAuthorityService.list(sysAuthorityQuery);
