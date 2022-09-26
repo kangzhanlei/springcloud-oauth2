@@ -1,4 +1,4 @@
-package cn.poile.ucs.auth.controller;
+package cn.poile.ucs.auth.constant.controller;
 
 import cn.poile.ucs.auth.response.ApiResponse;
 import cn.poile.ucs.auth.vo.UserDetailImpl;
@@ -36,6 +36,7 @@ public class AuthenticationController extends BaseController {
 
     /**
      * 更新用户信息时更新redis中的用户信息
+     *
      * @param authentication
      * @return java.lang.String
      */
@@ -52,16 +53,15 @@ public class AuthenticationController extends BaseController {
             }
             OAuth2AccessToken accessToken = tokenStore.getAccessToken(auth2Authentication);
             if (newOAuth2Authentication != null) {
-                tokenStore.storeAccessToken(accessToken,newOAuth2Authentication);
+                tokenStore.storeAccessToken(accessToken, newOAuth2Authentication);
             }
         }
         return "ok";
     }
 
     @GetMapping("/user")
-    public @ResponseBody
-    ApiResponse<Principal> userInfo(Principal user) {
-        log.info("user:{}",user);
+    public @ResponseBody ApiResponse<Principal> userInfo(Principal user) {
+        log.info("user:{}", user);
         return createResponse(user);
     }
 
@@ -69,10 +69,11 @@ public class AuthenticationController extends BaseController {
      * 退出时将token清空（使用RedisStore时就是删除掉对应缓存
      * 注: 这里的路径不能使用/logout，因为这个路径被LogoutFilter占用，配置文件配置了访问logout会转发到这里
      * 所以/logout和remove都能登出
+     *
      * @param authorization
      * @return
      */
-    @DeleteMapping("/remove")
+    @PostMapping("/remove")
     public @ResponseBody String logout(@RequestHeader(value = "Authorization") String authorization) {
         String accessToken = authorization.substring(OAuth2AccessToken.BEARER_TYPE.length()).trim();
         consumerTokenServices.revokeToken(accessToken);
@@ -81,6 +82,7 @@ public class AuthenticationController extends BaseController {
 
     /**
      * 不需要token访问测试
+     *
      * @return
      */
     @GetMapping("/test/no_need_token")
@@ -90,6 +92,7 @@ public class AuthenticationController extends BaseController {
 
     /**
      * 需要token访问接口测试
+     *
      * @return
      */
     @GetMapping("/test/need_token")
@@ -99,6 +102,7 @@ public class AuthenticationController extends BaseController {
 
     /**
      * 需要需要管理员权限
+     *
      * @return
      */
     @PreAuthorize("hasAuthority('admin')")
@@ -114,8 +118,7 @@ public class AuthenticationController extends BaseController {
      */
     @PreAuthorize("hasAuthority('admin2')")
     @GetMapping("/test/need_admin2")
-    public @ResponseBody
-    String admin2() {
+    public @ResponseBody String admin2() {
         return "need_admin2";
     }
 
@@ -126,14 +129,14 @@ public class AuthenticationController extends BaseController {
      */
     @PreAuthorize("#oauth2.clientHasRole('test')")
     @GetMapping("/test/need_client_test")
-    public @ResponseBody
-    String test4() {
+    public @ResponseBody String test4() {
         return "need_client_test";
     }
 
 
     /**
      * 认证页面
+     *
      * @return ModelAndView
      */
     @GetMapping("/login")
@@ -144,6 +147,7 @@ public class AuthenticationController extends BaseController {
 
     /**
      * scope 控制测试,该方法只有配置有scope为sever2的客户端能访问，针对的是客户端
+     *
      * @return
      */
     @GetMapping("/test/scope")

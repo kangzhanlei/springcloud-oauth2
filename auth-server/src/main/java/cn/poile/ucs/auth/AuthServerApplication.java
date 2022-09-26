@@ -4,7 +4,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
 
@@ -14,7 +13,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @create: 2019-09-25 16:48
  **/
 @SpringBootApplication
-@EnableDiscoveryClient
 @ServletComponentScan
 @MapperScan("cn.poile.ucs.auth.mapper")
 public class AuthServerApplication {

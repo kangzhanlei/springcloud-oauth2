@@ -2,9 +2,9 @@ spring:
   application:
     name: auth-server
   redis:
-    host: 127.0.0.1
-    password:
-    port: 6379
+    host: 139.198.30.134
+    password: P@ssw0rd
+    port: 30379
     timeout: 3000
     lettuce:
       pool:
@@ -15,9 +15,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/auth_db?useSSL=false
-    username: root
-    password: root
+    url: jdbc:mysql://gpi60l87gwnr2avms41d3kqoz9etcyub.mysql.qingcloud.link:3306/oauth2?useUnicode=true&usessl=false&characterEncoding=utf8
+    username: paperless
+    password: P@ssw0rdmysql
     druid:
       initial-size: 5
       min-idle: 5
@@ -53,12 +53,12 @@ spring:
 server:
   port: 8001
 
-#服务器发现注册配置
-eureka:
-  client:
-    serviceUrl:
-      #配置服务中心(可配置多个,用逗号隔开)
-      defaultZone: http://admin:admin@localhost:9000/eureka/
+##服务器发现注册配置
+#eureka:
+#  client:
+#    serviceUrl:
+#      #配置服务中心(可配置多个,用逗号隔开)
+#      defaultZone: http://admin:admin@localhost:9000/eureka/
 
 ##开启日志DEBUG级别，便于查看调试信息
 logging.level.org.springframework.security: DEBUG

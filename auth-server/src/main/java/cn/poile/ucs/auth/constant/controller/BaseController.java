@@ -1,4 +1,4 @@
-package cn.poile.ucs.auth.controller;
+package cn.poile.ucs.auth.constant.controller;
 
 import cn.poile.ucs.auth.constant.ErrorEnum;
 import cn.poile.ucs.auth.response.ApiResponse;
